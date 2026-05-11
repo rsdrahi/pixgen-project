@@ -5,9 +5,9 @@ const TopGeneration = async () => {
 
   const res = await fetch('https://pixgen-project-zeta.vercel.app/data.json');
   const photos = await res.json();
-  console.log(photos, 'photos');
+  // console.log(photos, 'photos');
   const topPhotos = photos.slice(0, 8);
-  console.log(topPhotos, "topPhotos");
+  // console.log(topPhotos, "topPhotos");
 
   return (
     <div>

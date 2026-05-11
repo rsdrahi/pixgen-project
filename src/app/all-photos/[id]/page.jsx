@@ -5,19 +5,24 @@ import React from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { FiDownload } from 'react-icons/fi';
 
-const PhotoCard = ({ photo }) => {
+const PhotoDetailsPage = async ({ params }) => {
 
-  // console.log(photo);
+  const { id } = await params;
+  const res = await fetch('https://pixgen-project-zeta.vercel.app/data.json');
+  const photos = await res.json();
+  console.log(photos, "photos");
+  const photo = photos.find(p => p.id == id);
+  console.log(photo, "photo");
 
   return (
-    <Card className='border rounded-xl'>
+    <Card className='border rounded-xl my-8'>
       <div className='relative w-full aspect-square'>
         <Image
           src={photo.imageUrl}
           fill
           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
           alt={photo.title}
-          className='rounded-xl object-cover'
+          className='rounded-xl'
         />
         <Chip className='absolute right-2 top-2'>{photo.category}</Chip>
       </div>
@@ -40,15 +45,17 @@ const PhotoCard = ({ photo }) => {
         </div>
       </div>
 
-      <Link href={`/all-photos/${photo.id}`}>
-        <Button
-          variant='outline' className={'w-full'}>
-          View
-        </Button>
+      <div className='flex justify-between items-center'>
+        <p>{photo.prompt}</p>
+        <p>{photo.createdAt}</p>
+      </div>
+
+      <Link href={'/'}>
+        <Button variant='outline' className='btn w-full'>Back Home</Button>
       </Link>
 
     </Card>
   );
 };
 
-export default PhotoCard;
+export default PhotoDetailsPage;

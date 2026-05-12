@@ -42,11 +42,10 @@ export default function SignUpPage() {
     }
   };
   const handleGoogleSignUp = async () => {
-    await authClient.signUp.social({
+    await authClient.signIn.social({
       provider: 'google'
     })
   }
-
 
   return (
     <Card className="border mx-auto w-125 py-10 mt-5">
